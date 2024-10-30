@@ -1,0 +1,39 @@
+-- Criação do Banco de Dados
+CREATE DATABASE Biblioteca;
+
+USE Biblioteca;
+
+-- Criação da Tabela Livros
+CREATE TABLE Livros (
+    id_livro INT PRIMARY KEY AUTO_INCREMENT,
+    titulo VARCHAR(100) NOT NULL,
+    autor VARCHAR(100) NOT NULL,
+    ano_publicacao INT NOT NULL
+);
+
+-- Criação da Tabela Exemplares
+CREATE TABLE Exemplares (
+    id_exemplar INT PRIMARY KEY AUTO_INCREMENT,
+    id_livro INT,
+    data_aquisicao DATE,
+    status VARCHAR(20),
+    FOREIGN KEY (id_livro) REFERENCES Livros(id_livro)
+);
+
+-- Inserir registros na tabela Livros
+INSERT INTO Livros (titulo, autor, ano_publicacao)
+VALUES 
+('O Senhor dos Anéis', 'J.R.R. Tolkien', 1954),
+('1984', 'George Orwell', 1949),
+('Dom Casmurro', 'Machado de Assis', 1899),
+('A Culpa é das Estrelas', 'John Green', 2012),
+('O Pequeno Príncipe', 'Antoine de Saint-Exupéry', 1943);
+
+-- Inserir registros na tabela Exemplares
+INSERT INTO Exemplares (id_livro, data_aquisicao, status)
+VALUES 
+(1, '2023-06-01', 'disponível'),
+(2, '2023-07-10', 'emprestado'),
+(3, '2023-08-15', 'disponível'),
+(4, '2023-09-20', 'disponível'),
+(5, '2023-10-05', 'emprestado');
