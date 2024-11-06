@@ -1,0 +1,47 @@
+CREATE DATABASE loja;
+USE loja;
+
+-- Criação da Tabela Produtos
+CREATE TABLE produtos (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(100),
+    preco DECIMAL(10, 2),
+    quantidade INT,
+    data_adicionado DATETIME
+);
+
+-- Inserção os dados na tabela
+INSERT INTO produtos (nome, preco, quantidade, data_adicionado)
+VALUES
+    ('Camiseta', 50.00, 40, NOW()),
+    ('Tênis Esportivo', 150.00, 20, NOW()),
+    ('Boné', 35.00, 50, NOW()),
+    ('Jaqueta', 120.00, 15, NOW()),
+    ('Calça Jeans', 80.00, 25, NOW());
+
+-- Soma total do valor dos produtos em estoque
+SELECT SUM(preco * quantidade) AS valor_total_estoque FROM produtos;
+
+-- Produtos com preço superior a R$100,00
+SELECT * FROM produtos WHERE preco > 100.00;
+
+-- Produtos com preço inferior a R$100,00 e quantidade maior que 30
+SELECT * FROM produtos WHERE preco < 100.00 AND quantidade > 30;
+
+-- Data de cadastro dos produtos (formatada)
+SELECT nome, DATE_FORMAT(data_adicionado, '%d/%m/%Y') AS data_cadastro FROM produtos;
+
+-- Preço médio dos produtos
+SELECT AVG(preco) AS preco_medio FROM produtos;
+
+-- Preço total de todos os produtos em estoque
+SELECT SUM(preco * quantidade) AS preco_total_estoque FROM produtos;
+
+-- Diferença de preço entre o produto mais caro e o mais barato
+SELECT MAX(preco) - MIN(preco) AS diferenca_preco FROM produtos;
+
+-- Preço arredondado do produto mais caro
+SELECT ROUND(MAX(preco), 2) AS preco_arredondado_mais_caro FROM produtos;
+
+-- Concatenar nome do produto e preço
+SELECT CONCAT(nome, ' - R$', preco) AS produto_preco FROM produtos;
